@@ -75,11 +75,11 @@ export default function Home() {
 
   return (
     <main className="bg-[var(--background)] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--background)]/90 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-5 py-4 lg:px-8">
+      <header className="sticky top-0 z-50 border-b border-white/15 bg-[#175d7d]/80 shadow-[0_12px_35px_rgba(5,38,57,0.22)] backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-5 py-3 lg:px-8">
           <div className="hidden items-center justify-between gap-4 md:flex">
-            <div className="flex min-w-[180px] items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(105,175,208,0.45)]">
+            <div className="group flex min-w-[180px] items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-yellow-200/50 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(199,228,241,0.35)] transition duration-300 group-hover:rotate-3 group-hover:scale-105 group-hover:shadow-[0_0_32px_rgba(199,228,241,0.55)]">
                 K
               </div>
               <div>
@@ -90,10 +90,15 @@ export default function Home() {
               </div>
             </div>
 
-            <nav className="flex flex-1 items-center justify-center gap-7 text-sm text-slate-300">
+            <nav className="flex flex-1 items-center justify-center gap-2 text-sm text-slate-300">
               {navItems.map((item) => (
-                <a key={item.href} href={item.href} className="transition hover:text-yellow-400">
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="group relative rounded-full border border-white/20 bg-white/5 px-4 py-2 text-slate-100 shadow-[0_4px_14px_rgba(5,38,57,0.12)] transition duration-300 hover:-translate-y-0.5 hover:border-yellow-200/75 hover:bg-white/12 hover:text-yellow-100 hover:shadow-[0_8px_20px_rgba(199,228,241,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-200/80"
+                >
                   {item.label}
+                  <span className="absolute inset-x-4 bottom-1 h-px origin-left scale-x-0 bg-yellow-200 transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
               ))}
             </nav>
@@ -103,7 +108,7 @@ export default function Home() {
                 href="https://wa.me/905413219801"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold text-slate-900 transition hover:scale-[1.02] hover:bg-yellow-300"
+                className="inline-flex rounded-full border border-yellow-200/60 bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-[0_8px_22px_rgba(199,228,241,0.25)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(199,228,241,0.4)] active:translate-y-0"
               >
                 WhatsApp
               </a>
@@ -112,7 +117,7 @@ export default function Home() {
 
           <div className="flex items-center justify-between gap-3 md:hidden">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(105,175,208,0.45)]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-yellow-200/50 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(199,228,241,0.35)]">
                 K
               </div>
               <div>
@@ -126,7 +131,7 @@ export default function Home() {
             <div className="flex items-center gap-2 sm:gap-3">
               <button
                 type="button"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-slate-200 shadow-[0_6px_18px_rgba(5,38,57,0.2)] transition duration-300 hover:border-yellow-200/50 hover:bg-white/15 hover:text-yellow-200"
                 onClick={() => setMenuOpen((open) => !open)}
                 aria-expanded={menuOpen}
                 aria-label="Mobil menü"
@@ -153,7 +158,7 @@ export default function Home() {
                 href="https://wa.me/905413219801"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full bg-yellow-400 px-3 py-2 text-xs font-bold text-slate-900 transition hover:scale-[1.02] hover:bg-yellow-300 sm:px-4 sm:text-sm"
+                className="inline-flex rounded-full border border-yellow-200/60 bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 px-3 py-2 text-xs font-bold text-slate-900 shadow-[0_8px_20px_rgba(199,228,241,0.25)] transition duration-300 hover:-translate-y-0.5 sm:px-4 sm:text-sm"
               >
                 WhatsApp
               </a>
@@ -161,12 +166,12 @@ export default function Home() {
           </div>
 
           <div className={`md:hidden ${menuOpen ? "mt-3 block" : "hidden"}`}>
-            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-slate-900/80 p-3">
+            <div className="flex flex-col gap-2 rounded-2xl border border-white/15 bg-[#0b3b55]/95 p-3 shadow-[0_18px_40px_rgba(5,38,57,0.35)]">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200"
+                  className="rounded-xl border border-white/25 bg-white/8 px-3 py-2 text-sm font-medium text-slate-100 shadow-[0_4px_12px_rgba(5,38,57,0.12)] transition hover:border-yellow-200/70 hover:bg-white/15 hover:text-yellow-100 hover:shadow-[0_8px_18px_rgba(199,228,241,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-200/80"
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
@@ -282,7 +287,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-white/10 bg-[#0f172a] px-4 py-3 shadow-xl sm:block">
+            <div className="relative mt-4 hidden w-fit rounded-2xl border border-white/10 bg-[#0f172a] px-4 py-3 shadow-[0_16px_35px_rgba(5,38,57,0.35)] sm:block">
               <div className="text-xs uppercase tracking-[0.2em] text-slate-400">Müşteri memnuniyeti</div>
               <div className="mt-2 text-2xl font-black text-yellow-400">4.9/5</div>
             </div>
@@ -301,16 +306,29 @@ export default function Home() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <div
               key={service.title}
-              className="group rounded-[26px] border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-6 transition hover:-translate-y-1 hover:border-yellow-400/50 hover:shadow-[0_20px_50px_rgba(105,175,208,0.22)]"
+              className="group relative isolate overflow-hidden rounded-[26px] border border-white/15 bg-[linear-gradient(145deg,rgba(9,49,70,0.96),rgba(8,27,42,0.98))] p-6 shadow-[0_18px_45px_rgba(5,35,55,0.22)] transition duration-300 hover:-translate-y-2 hover:border-yellow-400/70 hover:shadow-[0_24px_60px_rgba(9,54,77,0.48)]"
             >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 text-xl font-black text-slate-900">
-                ⚡
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 opacity-80 transition group-hover:opacity-100" />
+              <div className="absolute -right-10 -top-10 -z-10 h-32 w-32 rounded-full bg-yellow-400/10 blur-2xl transition duration-300 group-hover:bg-yellow-400/20" />
+              <div className="mb-7 flex items-start justify-between">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-yellow-200/30 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-xl font-black text-slate-900 shadow-[0_8px_25px_rgba(63,159,197,0.35)] transition duration-300 group-hover:rotate-3 group-hover:scale-105">
+                  ⚡
+                </div>
+                <span className="text-sm font-black tracking-[0.2em] text-yellow-200/70">
+                  0{index + 1}
+                </span>
               </div>
-              <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+              <h3 className="text-2xl font-black tracking-tight text-white transition group-hover:text-yellow-200">
+                {service.title}
+              </h3>
               <p className="mt-4 text-base leading-7 text-slate-300">{service.text}</p>
+              <div className="mt-7 flex items-center gap-2 text-sm font-bold text-yellow-200">
+                Detaylı bilgi
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </div>
             </div>
           ))}
         </div>
