@@ -182,7 +182,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(199,228,241,0.32),_transparent_25%),radial-gradient(circle_at_bottom_left,_rgba(105,175,208,0.2),_transparent_30%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-28">
           <div className="flex flex-col justify-center">
-            <span className="mb-5 inline-flex w-fit items-center rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-300">
+            <span className="mb-5 inline-flex w-fit items-center rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white-300">
               Acil elektrik servisleri
             </span>
 
