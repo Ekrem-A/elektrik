@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const services = [
   {
     title: "Elektrik Arıza & Onarım",
@@ -58,57 +62,131 @@ const reviews = [
   },
 ];
 
+const navItems = [
+  { label: "Hizmetler", href: "#hizmetler" },
+  { label: "Neden Biz", href: "#nedenbiz" },
+  { label: "Çalışma Alanları", href: "#calisma" },
+  { label: "Yorumlar", href: "#yorumlar" },
+  { label: "İletişim", href: "#iletisim" },
+];
+
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <main className="bg-[#07111f] text-white">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(251,191,36,0.45)]">
-              K
-            </div>
-            <div>
-              <div className="text-xl font-black tracking-tight">Kablomix</div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
-                Elektrik & Tesisat
+        <div className="mx-auto max-w-7xl px-5 py-4 lg:px-8">
+          <div className="hidden items-center justify-between gap-4 md:flex">
+            <div className="flex min-w-[180px] items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(251,191,36,0.45)]">
+                K
+              </div>
+              <div>
+                <div className="text-xl font-black tracking-tight">Kablomix</div>
+                <div className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
+                  Elektrik & Tesisat
+                </div>
               </div>
             </div>
+
+            <nav className="flex flex-1 items-center justify-center gap-7 text-sm text-slate-300">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href} className="transition hover:text-yellow-400">
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex min-w-[180px] items-center justify-end gap-3">
+              <a
+                href="tel:+905413219801"
+                className="hidden rounded-full border border-yellow-400/60 px-4 py-2 text-sm font-semibold text-yellow-300 transition hover:bg-yellow-400 hover:text-slate-900 xl:inline-flex"
+              >
+                Hemen Ara
+              </a>
+              <a
+                href="https://wa.me/905413219801"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold text-slate-900 transition hover:scale-[1.02] hover:bg-yellow-300"
+              >
+                WhatsApp
+              </a>
+            </div>
           </div>
 
-          <nav className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-            <a href="#hizmetler" className="transition hover:text-yellow-400">
-              Hizmetler
-            </a>
-            <a href="#nedenbiz" className="transition hover:text-yellow-400">
-              Neden Biz
-            </a>
-            <a href="#calisma" className="transition hover:text-yellow-400">
-              Çalışma Alanları
-            </a>
-            <a href="#yorumlar" className="transition hover:text-yellow-400">
-              Yorumlar
-            </a>
-            <a href="#iletisim" className="transition hover:text-yellow-400">
-              İletişim
-            </a>
-          </nav>
+          <div className="flex items-center justify-between gap-3 md:hidden">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(251,191,36,0.45)]">
+                K
+              </div>
+              <div>
+                <div className="text-xl font-black tracking-tight">Kablomix</div>
+                <div className="text-[10px] uppercase tracking-[0.25em] text-slate-400">
+                  Elektrik & Tesisat
+                </div>
+              </div>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <a
-              href="tel:+905413219801"
-              className="hidden rounded-full border border-yellow-400/60 px-4 py-2 text-sm font-semibold text-yellow-300 transition hover:bg-yellow-400 hover:text-slate-900 sm:inline-flex"
-            >
-              Hemen Ara
-            </a>
-            <a
-              href="https://wa.me/905413219801"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold text-slate-900 transition hover:scale-[1.02] hover:bg-yellow-300"
-            >
-              WhatsApp
-            </a>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href="tel:+905413219801"
+                className="inline-flex rounded-full border border-yellow-400/60 bg-yellow-400/10 px-3 py-2 text-xs font-semibold text-yellow-300 transition hover:bg-yellow-400 hover:text-slate-900 sm:px-4 sm:text-sm"
+              >
+                Hemen Ara
+              </a>
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10"
+                onClick={() => setMenuOpen((open) => !open)}
+                aria-expanded={menuOpen}
+                aria-label="Mobil menü"
+              >
+                <span className="flex flex-col items-center justify-center gap-1.5">
+                  <span
+                    className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${
+                      menuOpen ? "translate-y-2 rotate-45" : ""
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-5 rounded-full bg-current transition-opacity ${
+                      menuOpen ? "opacity-0" : "opacity-100"
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${
+                      menuOpen ? "-translate-y-2 -rotate-45" : ""
+                    }`}
+                  />
+                </span>
+              </button>
+              <a
+                href="https://wa.me/905413219801"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-full bg-yellow-400 px-3 py-2 text-xs font-bold text-slate-900 transition hover:scale-[1.02] hover:bg-yellow-300 sm:px-4 sm:text-sm"
+              >
+                WhatsApp
+              </a>
+            </div>
           </div>
+
+          <div className={`md:hidden ${menuOpen ? "mt-3 block" : "hidden"}`}>
+            <div className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-slate-900/80 p-3">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
         </div>
       </header>
 
@@ -131,10 +209,10 @@ export default function Home() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href="tel:+905551234567"
+                href="tel:+905413219801"
                 className="inline-flex items-center justify-center rounded-full bg-yellow-400 px-7 py-4 text-base font-bold text-slate-900 transition hover:bg-yellow-300"
               >
-                0555 123 45 67
+                0541 321 98 01
               </a>
               <a
                 href="#iletisim"
@@ -160,7 +238,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative mt-6 sm:mt-0">
             <div className="relative z-10 rounded-[28px] border border-white/10 bg-slate-900/60 p-5 shadow-[0_30px_80px_rgba(4,9,18,0.8)] backdrop-blur">
               <div className="rounded-[22px] border border-yellow-400/20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
                 <div className="mb-6 flex items-center justify-between">
@@ -216,7 +294,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="absolute -bottom-6 -left-6 rounded-2xl border border-white/10 bg-[#0f172a] px-4 py-3 shadow-xl">
+            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-white/10 bg-[#0f172a] px-4 py-3 shadow-xl sm:block">
               <div className="text-xs uppercase tracking-[0.2em] text-slate-400">Müşteri memnuniyeti</div>
               <div className="mt-2 text-2xl font-black text-yellow-400">4.9/5</div>
             </div>
