@@ -1,39 +1,84 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const services = [
   {
     title: "Elektrik Arıza & Onarım",
+    icon: "⚡",
     image: "/arıza.jpg",
     text: "Aniden kesilen enerji, kısa devre ve arıza sorunlarında hızlı ve güvenli müdahale.",
   },
   {
     title: "Tesisat & Kurulum",
+    icon: "⌂",
     image: "/tesisat.jpg",
     text: "Yeni ev, iş yeri veya ofis için sağlıklı ve doğru elektrik tesisatı çözümleri.",
   },
   {
     title: "Pano & Sigorta",
+    icon: "▦",
     image: "/pano.jpg",
     text: "Pano bakımı, sigorta değişimi ve güvenli güç dağıtımı hizmetleri.",
   },
   {
     title: "Aydınlatma",
+    icon: "☼",
     text: "Modern, verimli ve estetik aydınlatma sistemleriyle mekanlarınızı güçlendirin.",
   },
   {
     title: "Bakım & Denetim",
+    icon: "✓",
     text: "Düzenli bakım ile enerji kaybını azaltır, güvenliği artırır ve arızaları önler.",
   },
   {
     title: "Acil Hizmet",
+    icon: "!",
     text: "Günün her saati, acil elektrik sorunlarında profesyonel destek ve hızlı müdahale.",
+  },
+  {
+    title: "Kamera Sistemleri",
+    icon: "◉",
+    text: "Ev, iş yeri ve site güvenliği için profesyonel kamera kurulumu ve izleme çözümleri.",
+  },
+  {
+    title: "Turnike Geçiş Sistemleri",
+    icon: "⇥",
+    text: "Personel ve ziyaretçi geçişlerini düzenleyen güvenli turnike sistemleri.",
+  },
+  {
+    title: "Alarm Sistemleri",
+    icon: "♢",
+    text: "Hırsızlık, acil durum ve izinsiz girişlere karşı hızlı uyarı ve alarm çözümleri.",
+  },
+  {
+    title: "Kartlı Geçiş Sistemleri",
+    icon: "▣",
+    text: "Yetkili kişilere özel, kontrollü ve kayıtlı kartlı geçiş uygulamaları.",
+  },
+  {
+    title: "Yangın Algılama Sistemleri",
+    icon: "♨",
+    text: "Duman ve yangın risklerini erken tespit eden güvenilir algılama sistemleri.",
+  },
+  {
+    title: "Bariyer Sistemleri",
+    icon: "╋",
+    text: "Otopark, site ve işletme girişleri için otomatik bariyer ve kontrol çözümleri.",
+  },
+  {
+    title: "Asansör Kamerası",
+    icon: "▥",
+    text: "Asansör içi güvenlik ve uzaktan izleme için kompakt kamera sistemleri.",
+  },
+  {
+    title: "HGS Geçiş Sistemleri",
+    icon: "≫",
+    text: "Araç giriş çıkışlarını hızlandıran ve kayıt altına alan HGS geçiş çözümleri.",
   },
 ];
 
 const reasons = [
-  "15+ yıllık iş tecrübesi",
   "Güvenli ve standartlara uygun işçilik",
   "Uygun fiyat garantisi",
   "Hızlı müdahale ve acil servis",
@@ -45,7 +90,6 @@ const stats = [
   { value: "1500+", label: "Tamamlanan iş" },
   { value: "24/7", label: "Acil çağrı desteği" },
   { value: "98%", label: "Tekrar eden müşteri" },
-  { value: "15 Yıl", label: "Tecrübe" },
 ];
 
 const reviews = [
@@ -71,21 +115,65 @@ const navItems = [
   { label: "İletişim", href: "#iletisim" },
 ];
 
-const anatolianDistricts = [
-  "Kadıköy",
-  "Üsküdar",
+const istanbulDistricts = [
+  "Adalar",
+  "Arnavutköy",
   "Ataşehir",
-  "Maltepe",
-  "Kartal",
-  "Pendik",
-  "Tuzla",
-  "Çekmeköy",
-  "Sancaktepe",
+  "Avcılar",
+  "Bağcılar",
+  "Bahçelievler",
+  "Bakırköy",
+  "Başakşehir",
+  "Bayrampaşa",
+  "Beşiktaş",
   "Beykoz",
+  "Beylikdüzü",
+  "Beyoğlu",
+  "Büyükçekmece",
+  "Çatalca",
+  "Çekmeköy",
+  "Esenler",
+  "Esenyurt",
+  "Eyüpsultan",
+  "Fatih",
+  "Gaziosmanpaşa",
+  "Güngören",
+  "Kadıköy",
+  "Kartal",
+  "Kağıthane",
+  "Küçükçekmece",
+  "Maltepe",
+  "Pendik",
+  "Sancaktepe",
+  "Sarıyer",
+  "Silivri",
+  "Sultanbeyli",
+  "Sultangazi",
+  "Şile",
+  "Şişli",
+  "Tuzla",
+  "Ümraniye",
+  "Üsküdar",
+  "Zeytinburnu",
+];
+
+const topSlides = [
+  { image: "/slayt1.png", label: "Profesyonel elektrik çözümleri" },
+  { image: "/istanbul-bosphorus.jpg", label: "Tüm İstanbul'a hizmet" },
+  { image: "/pano.jpg", label: "Güvenli pano ve tesisat uygulamaları" },
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeTopSlide, setActiveTopSlide] = useState(0);
+
+  useEffect(() => {
+    const slideTimer = window.setInterval(() => {
+      setActiveTopSlide((current) => (current + 1) % topSlides.length);
+    }, 4500);
+
+    return () => window.clearInterval(slideTimer);
+  }, []);
 
   return (
     <main className="bg-[var(--background)] text-slate-900">
@@ -122,7 +210,7 @@ export default function Home() {
                 href="https://wa.me/905413219801"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full border border-sky-700 bg-sky-700 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_22px_rgba(29,111,150,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-sky-800 hover:shadow-[0_12px_30px_rgba(29,111,150,0.4)] active:translate-y-0"
+                className="inline-flex rounded-full border border-green-600 bg-green-600 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_22px_rgba(22,163,74,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-green-700 hover:shadow-[0_12px_30px_rgba(22,163,74,0.4)] active:translate-y-0"
               >
                 WhatsApp
               </a>
@@ -143,6 +231,14 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href="https://wa.me/905413219801"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-full border border-green-600 bg-green-600 px-3 py-2 text-xs font-bold text-white shadow-[0_8px_20px_rgba(22,163,74,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-green-700 sm:px-4 sm:text-sm"
+              >
+                WhatsApp
+              </a>
               <button
                 type="button"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sky-900/15 bg-sky-50 text-sky-800 shadow-[0_6px_18px_rgba(16,42,67,0.12)] transition duration-300 hover:border-sky-500/50 hover:bg-sky-100"
@@ -168,14 +264,6 @@ export default function Home() {
                   />
                 </span>
               </button>
-              <a
-                href="https://wa.me/905413219801"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex rounded-full border border-sky-700 bg-sky-700 px-3 py-2 text-xs font-bold text-white shadow-[0_8px_20px_rgba(29,111,150,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-sky-800 sm:px-4 sm:text-sm"
-              >
-                WhatsApp
-              </a>
             </div>
           </div>
 
@@ -196,6 +284,42 @@ export default function Home() {
 
         </div>
       </header>
+
+      <section className="relative h-52 overflow-hidden bg-[#123d59] sm:h-64 lg:h-72" aria-label="Öne çıkan görseller">
+        {topSlides.map((slide, index) => (
+          <div
+            key={slide.image}
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out ${
+              activeTopSlide === index ? "scale-100 opacity-100" : "scale-105 opacity-0"
+            }`}
+            style={{ backgroundImage: `url('${slide.image}')` }}
+          >
+            <div className="absolute inset-0 bg-[#082f49]/55" />
+          </div>
+        ))}
+        <div className="relative mx-auto flex h-full max-w-7xl items-end justify-between px-5 pb-6 lg:px-8">
+          <div className="max-w-md text-white">
+            <div className="text-xs font-bold uppercase tracking-[0.22em] text-sky-200">
+              Kablomix
+            </div>
+            <h2 className="mt-2 text-2xl font-black sm:text-3xl">{topSlides[activeTopSlide].label}</h2>
+          </div>
+          <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-2 backdrop-blur">
+            {topSlides.map((slide, index) => (
+              <button
+                key={slide.image}
+                type="button"
+                aria-label={`${index + 1}. slider görselini göster`}
+                aria-pressed={activeTopSlide === index}
+                onClick={() => setActiveTopSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeTopSlide === index ? "w-8 bg-white" : "w-2 bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(199,228,241,0.55),_transparent_32%),radial-gradient(circle_at_bottom_left,_rgba(145,199,223,0.22),_transparent_35%)]" />
@@ -254,21 +378,21 @@ export default function Home() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">
-                  Hizmet bölgelerimiz
+                  Hizmet bölgemiz
                 </div>
                 <h2 className="mt-3 text-2xl font-black text-slate-900 md:text-3xl">
-                  Anadolu Yakası
+                  İstanbul geneli
                 </h2>
               </div>
               <span className="rounded-full bg-sky-700 px-3 py-1.5 text-xs font-black text-white shadow-[0_8px_18px_rgba(29,111,150,0.22)]">
-                10 ilçe
+                39 ilçe
               </span>
             </div>
             <p className="mt-4 text-sm leading-6 text-slate-600">
-              Anadolu Yakası&apos;nda hızlı, güvenli ve profesyonel elektrik hizmeti.
+              İstanbul&apos;un tüm ilçelerinde hızlı, güvenli ve profesyonel elektrik hizmeti.
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {anatolianDistricts.map((district, index) => (
+            <div className="mt-6 grid max-h-72 grid-cols-2 gap-2 overflow-y-auto pr-1 sm:grid-cols-3">
+              {istanbulDistricts.map((district, index) => (
                 <div
                   key={district}
                   className="group flex items-center gap-2 rounded-xl border border-sky-900/10 bg-white/80 px-3 py-3 text-sm font-semibold text-slate-700 shadow-[0_5px_14px_rgba(16,42,67,0.06)] transition hover:-translate-y-0.5 hover:border-sky-500/40 hover:bg-sky-50 hover:text-sky-800"
@@ -315,7 +439,7 @@ export default function Home() {
               <div className="absolute -right-10 -top-10 -z-10 h-32 w-32 rounded-full bg-yellow-400/10 blur-2xl transition duration-300 group-hover:bg-yellow-400/20" />
               <div className="relative z-10 mb-7 flex items-start justify-between">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-yellow-200/30 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-xl font-black text-slate-900 shadow-[0_8px_25px_rgba(63,159,197,0.35)] transition duration-300 group-hover:rotate-3 group-hover:scale-105">
-                  ⚡
+                  {service.icon}
                 </div>
                 <span className="text-sm font-black tracking-[0.2em] text-yellow-200/70">
                   0{index + 1}
