@@ -100,12 +100,6 @@ export default function Home() {
 
             <div className="flex min-w-[180px] items-center justify-end gap-3">
               <a
-                href="tel:+905413219801"
-                className="hidden rounded-full border border-yellow-400/60 px-4 py-2 text-sm font-semibold text-yellow-300 transition hover:bg-yellow-400 hover:text-slate-900 xl:inline-flex"
-              >
-                Hemen Ara
-              </a>
-              <a
                 href="https://wa.me/905413219801"
                 target="_blank"
                 rel="noreferrer"
@@ -130,12 +124,6 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <a
-                href="tel:+905413219801"
-                className="inline-flex rounded-full border border-yellow-400/60 bg-yellow-400/10 px-3 py-2 text-xs font-semibold text-yellow-300 transition hover:bg-yellow-400 hover:text-slate-900 sm:px-4 sm:text-sm"
-              >
-                Hemen Ara
-              </a>
               <button
                 type="button"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10"
