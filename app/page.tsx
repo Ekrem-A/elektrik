@@ -74,12 +74,12 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="bg-[#07111f] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/90 backdrop-blur">
+    <main className="bg-[var(--background)] text-white">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--background)]/90 backdrop-blur">
         <div className="mx-auto max-w-7xl px-5 py-4 lg:px-8">
           <div className="hidden items-center justify-between gap-4 md:flex">
             <div className="flex min-w-[180px] items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(251,191,36,0.45)]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(105,175,208,0.45)]">
                 K
               </div>
               <div>
@@ -112,7 +112,7 @@ export default function Home() {
 
           <div className="flex items-center justify-between gap-3 md:hidden">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(251,191,36,0.45)]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(105,175,208,0.45)]">
                 K
               </div>
               <div>
@@ -179,7 +179,7 @@ export default function Home() {
       </header>
 
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(251,191,36,0.22),_transparent_25%),radial-gradient(circle_at_bottom_left,_rgba(59,130,246,0.12),_transparent_30%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(199,228,241,0.32),_transparent_25%),radial-gradient(circle_at_bottom_left,_rgba(105,175,208,0.2),_transparent_30%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-28">
           <div className="flex flex-col justify-center">
             <span className="mb-5 inline-flex w-fit items-center rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-300">
@@ -304,7 +304,7 @@ export default function Home() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group rounded-[26px] border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-6 transition hover:-translate-y-1 hover:border-yellow-400/50 hover:shadow-[0_20px_50px_rgba(251,191,36,0.12)]"
+              className="group rounded-[26px] border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-6 transition hover:-translate-y-1 hover:border-yellow-400/50 hover:shadow-[0_20px_50px_rgba(105,175,208,0.22)]"
             >
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 text-xl font-black text-slate-900">
                 ⚡
