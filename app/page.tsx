@@ -5,14 +5,17 @@ import { useState } from "react";
 const services = [
   {
     title: "Elektrik Arıza & Onarım",
+    image: "/arıza.jpg",
     text: "Aniden kesilen enerji, kısa devre ve arıza sorunlarında hızlı ve güvenli müdahale.",
   },
   {
     title: "Tesisat & Kurulum",
+    image: "/tesisat.jpg",
     text: "Yeni ev, iş yeri veya ofis için sağlıklı ve doğru elektrik tesisatı çözümleri.",
   },
   {
     title: "Pano & Sigorta",
+    image: "/pano.jpg",
     text: "Pano bakımı, sigorta değişimi ve güvenli güç dağıtımı hizmetleri.",
   },
   {
@@ -251,7 +254,7 @@ export default function Home() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">
-                  Hizmet bölgemiz
+                  Hizmet bölgelerimiz
                 </div>
                 <h2 className="mt-3 text-2xl font-black text-slate-900 md:text-3xl">
                   Anadolu Yakası
@@ -298,9 +301,19 @@ export default function Home() {
               key={service.title}
               className="group relative isolate overflow-hidden rounded-[20px] border border-sky-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(16,42,67,0.1)] transition duration-300 hover:-translate-y-2 hover:border-sky-500/50 hover:shadow-[0_20px_45px_rgba(29,111,150,0.2)]"
             >
+              {service.image && (
+                <>
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 z-0 bg-cover bg-center opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-95"
+                    style={{ backgroundImage: `url('${service.image}')` }}
+                  />
+                  <div className="absolute inset-0 z-0 bg-white/75 transition duration-300 group-hover:bg-white/60" />
+                </>
+              )}
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 opacity-80 transition group-hover:opacity-100" />
               <div className="absolute -right-10 -top-10 -z-10 h-32 w-32 rounded-full bg-yellow-400/10 blur-2xl transition duration-300 group-hover:bg-yellow-400/20" />
-              <div className="mb-7 flex items-start justify-between">
+              <div className="relative z-10 mb-7 flex items-start justify-between">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-yellow-200/30 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-xl font-black text-slate-900 shadow-[0_8px_25px_rgba(63,159,197,0.35)] transition duration-300 group-hover:rotate-3 group-hover:scale-105">
                   ⚡
                 </div>
@@ -308,11 +321,11 @@ export default function Home() {
                   0{index + 1}
                 </span>
               </div>
-              <h3 className="text-xl font-black tracking-tight text-slate-900 transition group-hover:text-sky-700">
+              <h3 className="relative z-10 text-xl font-black tracking-tight text-slate-900 transition group-hover:text-sky-700">
                 {service.title}
               </h3>
-              <p className="mt-4 text-sm leading-6 text-slate-600">{service.text}</p>
-              <div className="mt-7 flex items-center gap-2 text-sm font-bold text-sky-700">
+              <p className="relative z-10 mt-4 text-sm leading-6 text-slate-700">{service.text}</p>
+              <div className="relative z-10 mt-7 flex items-center gap-2 text-sm font-bold text-sky-700">
                 Detaylı bilgi
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </div>
@@ -374,7 +387,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <div className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-200">
-            Hizmet bölgelerimiz
+            Çalışma Alanlarımız
           </div>
           <h2 className="mt-4 text-3xl font-black text-white md:text-5xl">
             Farklı alanlarda güvenli elektrik çözümleri.
