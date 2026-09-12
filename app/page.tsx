@@ -612,7 +612,7 @@ export default function Home() {
                     ☎
                   </span>
                   <a href="tel:+905551234567" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
-                    0555 123 45 67
+                    0541 321 98 01
                   </a>
                 </div>
 
