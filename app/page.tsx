@@ -335,12 +335,12 @@ export default function Home() {
             </span>
 
             <h1 className="max-w-xl text-4xl font-black leading-tight tracking-tight text-slate-900 md:text-6xl">
-              Güvenli elektrik çözümleri <span className="text-sky-700">hızlıca</span> yanınızda.
+              İstanbul&apos;da elektrik arıza, tesisat ve onarım hizmetleri.
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
-              Kıran Enerji, ev, iş yeri ve sanayi alanlarında elektrik arıza, tesisat, bakım ve
-              güvenli kurulum hizmetlerini modern yaklaşım ve profesyonel ekip anlayışıyla sunar.
+              Kıran Enerji, İstanbul genelinde ev ve iş yerleri için elektrikçi desteği,
+              elektrik arıza onarımı, tesisat kurulumu, pano ve bakım hizmetleri sunar.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">

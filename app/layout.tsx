@@ -14,9 +14,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kıran Enerji | Elektrik & Tesisat Hizmetleri",
+  metadataBase: new URL("https://kiranenerji.com"),
+  title: "Kıran Enerji | İstanbul Elektrikçi, Tesisat ve Arıza Servisi",
   description:
-    "Kıran Enerji; elektrik arıza, tesisat, bakım, pano ve aydınlatma çözümleri için güvenilir ve hızlı hizmet sunar.",
+    "Kıran Enerji, İstanbul genelinde elektrik arıza onarımı, elektrik tesisatı, pano ve bakım hizmetleri sunar. Elektrikçi desteği için hemen arayın.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://kiranenerji.com",
+    siteName: "Kıran Enerji",
+    title: "Kıran Enerji | İstanbul Elektrikçi ve Tesisat Hizmetleri",
+    description:
+      "İstanbul genelinde elektrik arıza, tesisat, pano ve bakım hizmetleri.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kıran Enerji | İstanbul Elektrikçi ve Tesisat Hizmetleri",
+    description:
+      "İstanbul genelinde elektrik arıza, tesisat, pano ve bakım hizmetleri.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "@id": "https://kiranenerji.com/#business",
+  name: "Kıran Enerji",
+  url: "https://kiranenerji.com",
+  telephone: "+905413219801",
+  description:
+    "İstanbul genelinde elektrik arıza onarımı, elektrik tesisatı, pano ve bakım hizmetleri.",
+  areaServed: {
+    "@type": "City",
+    name: "İstanbul",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -25,7 +63,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#07111f] text-white">{children}</body>
+      <body className="min-h-full bg-[#07111f] text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
