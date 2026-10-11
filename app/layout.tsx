@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kiranenerji.com"),
+  metadataBase: new URL("https://www.kiranenerji.com"),
   title: "Kıran Enerji | İstanbul Elektrikçi, Tesisat ve Arıza Servisi",
   description:
     "Kıran Enerji, İstanbul genelinde elektrik arıza onarımı, elektrik tesisatı, pano ve bakım hizmetleri sunar. Elektrikçi desteği için hemen arayın.",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: "https://kiranenerji.com",
+    url: "https://www.kiranenerji.com",
     siteName: "Kıran Enerji",
     title: "Kıran Enerji | İstanbul Elektrikçi ve Tesisat Hizmetleri",
     description:
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "Electrician",
-  "@id": "https://kiranenerji.com/#business",
+  "@id": "https://www.kiranenerji.com/#business",
   name: "Kıran Enerji",
-  url: "https://kiranenerji.com",
+  url: "https://www.kiranenerji.com",
   telephone: "+905413219801",
   description:
     "İstanbul genelinde elektrik arıza onarımı, elektrik tesisatı, pano ve bakım hizmetleri.",

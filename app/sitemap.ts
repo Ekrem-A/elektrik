@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://kiranenerji.com" }];
+  return [{ url: "https://www.kiranenerji.com" }];
 }
