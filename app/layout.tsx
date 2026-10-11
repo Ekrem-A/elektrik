@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kablomix | Elektrik & Tesisat Hizmetleri",
+  title: "Kıran Enerji | Elektrik & Tesisat Hizmetleri",
   description:
-    "Kablomix elektrik arıza, tesisat, bakım, pano ve aydınlatma çözümleri için güvenilir ve hızlı hizmet sunar.",
+    "Kıran Enerji; elektrik arıza, tesisat, bakım, pano ve aydınlatma çözümleri için güvenilir ve hızlı hizmet sunar.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

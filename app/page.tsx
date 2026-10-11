@@ -185,7 +185,7 @@ export default function Home() {
                 K
               </div>
               <div>
-                <div className="text-xl font-black tracking-tight text-slate-900">Kablomix</div>
+                <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
                   Elektrik & Tesisat
                 </div>
@@ -223,7 +223,7 @@ export default function Home() {
                 K
               </div>
               <div>
-                <div className="text-xl font-black tracking-tight text-slate-900">Kablomix</div>
+                <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
                   Elektrik & Tesisat
                 </div>
@@ -300,7 +300,7 @@ export default function Home() {
         <div className="relative mx-auto flex h-full max-w-7xl items-end justify-between px-5 pb-6 lg:px-8">
           <div className="max-w-md text-white">
             <div className="text-xs font-bold uppercase tracking-[0.22em] text-sky-200">
-              Kablomix
+              Kıran Enerji
             </div>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">{topSlides[activeTopSlide].label}</h2>
           </div>
@@ -339,7 +339,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
-              Kablomix, ev, iş yeri ve sanayi alanlarında elektrik arıza, tesisat, bakım ve
+              Kıran Enerji, ev, iş yeri ve sanayi alanlarında elektrik arıza, tesisat, bakım ve
               güvenli kurulum hizmetlerini modern yaklaşım ve profesyonel ekip anlayışıyla sunar.
             </p>
 
@@ -464,13 +464,13 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <div className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-700">
-                Neden Kablomix?
+                Neden Kıran Enerji?
               </div>
               <h2 className="mt-4 text-3xl font-black text-slate-900 md:text-5xl">
                 Güvenilir ekip, temiz işçilik ve güçlü sonuç.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-600">
-                Kablomix, teknik bilgi, güvenlik bilinci ve müşteri odaklı yaklaşımı birleştirerek
+                Kıran Enerji, teknik bilgi, güvenlik bilinci ve müşteri odaklı yaklaşımı birleştirerek
                 işinizi kısa sürede ve doğru şekilde tamamlar.
               </p>
 
@@ -548,7 +548,7 @@ export default function Home() {
                   {item.icon}
                 </div>
                 <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-sky-100">
-                  Kablomix
+                  Kıran Enerji
                 </span>
               </div>
               <div className="relative z-10 mb-3 text-xl font-black text-white transition group-hover:text-sky-100">{item.title}</div>
@@ -570,7 +570,7 @@ export default function Home() {
               Referanslar
             </div>
             <h2 className="mt-4 text-3xl font-black text-slate-900 md:text-5xl">
-              Müşterilerimiz Kablomix’i tercih ediyor.
+              Müşterilerimiz Kıran Enerji’yi tercih ediyor.
             </h2>
           </div>
 
@@ -663,8 +663,8 @@ export default function Home() {
 
       <footer className="border-t border-white/10 bg-[#050d18]">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between lg:px-8">
-          <div className="text-lg font-black text-white">Kablomix</div>
-          <div>© 2026 Kablomix. Tüm hakları saklıdır.</div>
+          <div className="text-lg font-black text-white">Kıran Enerji</div>
+          <div>© 2026 Kıran Enerji. Tüm hakları saklıdır.</div>
           <div>Elektrik & Tesisat Hizmetleri</div>
         </div>
       </footer>
