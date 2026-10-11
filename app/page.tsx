@@ -620,8 +620,8 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-slate-900 font-black">
                     ✉
                   </span>
-                  <a href="mailto:info@kablomix.com" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
-                    info@kablomix.com
+                  <a href="mailto:info@kiranenerji.com" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
+                    info@kiranenerji.com
                   </a>
                 </div>
 
