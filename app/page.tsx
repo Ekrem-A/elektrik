@@ -611,7 +611,7 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-slate-900 font-black">
                     ☎
                   </span>
-                  <a href="tel:+905551234567" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
+                  <a href="tel:+905413219801" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
                     0541 321 98 01
                   </a>
                 </div>
