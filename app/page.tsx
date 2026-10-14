@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const services = [
   {
@@ -181,9 +182,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 py-3 lg:px-8">
           <div className="hidden items-center justify-between gap-4 md:flex">
             <div className="group flex min-w-[180px] items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-yellow-200/50 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(199,228,241,0.35)] transition duration-300 group-hover:rotate-3 group-hover:scale-105 group-hover:shadow-[0_0_32px_rgba(199,228,241,0.55)]">
-                K
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Kıran Enerji"
+                width={1476}
+                height={1066}
+                unoptimized
+                className="h-auto w-[60px] object-contain transition duration-300 group-hover:scale-105"
+              />
               <div>
                 <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
@@ -219,9 +225,14 @@ export default function Home() {
 
           <div className="flex items-center justify-between gap-3 md:hidden">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-yellow-200/50 bg-gradient-to-br from-yellow-200 via-yellow-400 to-amber-500 text-lg font-black text-slate-900 shadow-[0_0_24px_rgba(199,228,241,0.35)]">
-                K
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Kıran Enerji"
+                width={1476}
+                height={1066}
+                unoptimized
+                className="h-auto w-[60px] object-contain"
+              />
               <div>
                 <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
