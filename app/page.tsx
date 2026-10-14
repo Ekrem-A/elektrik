@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { DEFAULT_SITE_SETTINGS } from "./lib/site-content";
+import { getBrowserSupabaseClient } from "./lib/supabase";
+import { SiteFooter } from "./components/site-footer";
+import { SiteHeader } from "./components/site-header";
 
 const services = [
   {
@@ -108,15 +111,6 @@ const reviews = [
   },
 ];
 
-const navItems = [
-  { label: "Hizmetler", href: "#hizmetler" },
-  { label: "Neden Biz", href: "#nedenbiz" },
-  { label: "Çalışma Alanları", href: "#calisma" },
-  { label: "Blog", href: "/blog" },
-  { label: "Yorumlar", href: "#yorumlar" },
-  { label: "İletişim", href: "#iletisim" },
-];
-
 const istanbulDistricts = [
   "Adalar",
   "Arnavutköy",
@@ -166,8 +160,11 @@ const topSlides = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeTopSlide, setActiveTopSlide] = useState(0);
+  const [siteSettings, setSiteSettings] = useState(DEFAULT_SITE_SETTINGS);
+  const [serviceItems, setServiceItems] = useState(services);
+
+  const phoneHref = `tel:${siteSettings.phone.replace(/[^\d+]/g, "")}`;
 
   useEffect(() => {
     const slideTimer = window.setInterval(() => {
@@ -177,125 +174,42 @@ export default function Home() {
     return () => window.clearInterval(slideTimer);
   }, []);
 
+  useEffect(() => {
+    const availableClient = getBrowserSupabaseClient();
+    if (!availableClient) return;
+    const client = availableClient;
+
+    let active = true;
+
+    async function loadSiteContent() {
+      const [settingsResult, servicesResult] = await Promise.all([
+        client.from("site_settings").select("*").eq("id", "main").single(),
+        client.from("services").select("*").eq("is_published", true).order("sort_order"),
+      ]);
+
+      if (!active) return;
+      if (settingsResult.data) setSiteSettings(settingsResult.data);
+      if (servicesResult.data) {
+        setServiceItems(
+          servicesResult.data.map((service) => ({
+            title: service.title,
+            icon: service.icon,
+            image: service.image_url ?? undefined,
+            text: service.text,
+          })),
+        );
+      }
+    }
+
+    void loadSiteContent();
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <main className="bg-[var(--background)] text-slate-900">
-      <header className="sticky top-0 z-50 border-b border-sky-900/10 bg-white/90 shadow-[0_8px_24px_rgba(16,42,67,0.1)] backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl px-5 py-3 lg:px-8">
-          <div className="hidden items-center justify-between gap-4 md:flex">
-            <div className="group flex min-w-[180px] items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Kıran Enerji"
-                width={1476}
-                height={1066}
-                unoptimized
-                className="h-auto w-[60px] object-contain transition duration-300 group-hover:scale-105"
-              />
-              <div>
-                <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Elektrik & Tesisat
-                </div>
-              </div>
-            </div>
-
-            <nav className="flex flex-1 items-center justify-center gap-2 text-sm text-slate-700">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="group relative rounded-full border border-sky-900/15 bg-white px-4 py-2 text-slate-700 shadow-[0_4px_14px_rgba(16,42,67,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-sky-600/50 hover:bg-sky-50 hover:text-sky-800 hover:shadow-[0_8px_20px_rgba(63,159,197,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/80"
-                >
-                  {item.label}
-                  <span className="absolute inset-x-4 bottom-1 h-px origin-left scale-x-0 bg-sky-600 transition-transform duration-300 group-hover:scale-x-100" />
-                </a>
-              ))}
-            </nav>
-
-            <div className="flex min-w-[180px] items-center justify-end gap-3">
-              <a
-                href="https://wa.me/905413219801"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex rounded-full border border-green-600 bg-green-600 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_22px_rgba(22,163,74,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-green-700 hover:shadow-[0_12px_30px_rgba(22,163,74,0.4)] active:translate-y-0"
-              >
-                WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between gap-3 md:hidden">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Kıran Enerji"
-                width={1476}
-                height={1066}
-                unoptimized
-                className="h-auto w-[60px] object-contain"
-              />
-              <div>
-                <div className="text-xl font-black tracking-tight text-slate-900">Kıran Enerji</div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Elektrik & Tesisat
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 sm:gap-3">
-              <a
-                href="https://wa.me/905413219801"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex rounded-full border border-green-600 bg-green-600 px-3 py-2 text-xs font-bold text-white shadow-[0_8px_20px_rgba(22,163,74,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-green-700 sm:px-4 sm:text-sm"
-              >
-                WhatsApp
-              </a>
-              <button
-                type="button"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sky-900/15 bg-sky-50 text-sky-800 shadow-[0_6px_18px_rgba(16,42,67,0.12)] transition duration-300 hover:border-sky-500/50 hover:bg-sky-100"
-                onClick={() => setMenuOpen((open) => !open)}
-                aria-expanded={menuOpen}
-                aria-label="Mobil menü"
-              >
-                <span className="flex flex-col items-center justify-center gap-1.5">
-                  <span
-                    className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${
-                      menuOpen ? "translate-y-2 rotate-45" : ""
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-5 rounded-full bg-current transition-opacity ${
-                      menuOpen ? "opacity-0" : "opacity-100"
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${
-                      menuOpen ? "-translate-y-2 -rotate-45" : ""
-                    }`}
-                  />
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div className={`md:hidden ${menuOpen ? "mt-3 block" : "hidden"}`}>
-            <div className="flex flex-col gap-2 rounded-2xl border border-sky-900/10 bg-white p-3 shadow-[0_18px_40px_rgba(16,42,67,0.15)]">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-xl border border-sky-900/15 bg-sky-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-[0_4px_12px_rgba(16,42,67,0.08)] transition hover:border-sky-500/60 hover:bg-sky-100 hover:text-sky-800 hover:shadow-[0_8px_18px_rgba(63,159,197,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/80"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </header>
+      <SiteHeader settings={siteSettings} currentPath="/" />
 
       <section className="relative h-52 overflow-hidden bg-[#123d59] sm:h-64 lg:h-72" aria-label="Öne çıkan görseller">
         {topSlides.map((slide, index) => (
@@ -343,24 +257,23 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-28">
           <div className="flex max-w-2xl flex-col justify-center">
             <span className="mb-5 inline-flex w-fit items-center rounded-full border border-sky-600/25 bg-sky-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-sky-800">
-              Acil elektrik servisleri
+              {siteSettings.hero_badge}
             </span>
 
             <h1 className="max-w-xl text-4xl font-black leading-tight tracking-tight text-slate-900 md:text-6xl">
-              İstanbul&apos;da elektrik arıza, tesisat ve onarım hizmetleri.
+              {siteSettings.hero_title}
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
-              Kıran Enerji, İstanbul genelinde ev ve iş yerleri için elektrikçi desteği,
-              elektrik arıza onarımı, tesisat kurulumu, pano ve bakım hizmetleri sunar.
+              {siteSettings.hero_description}
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href="tel:+905413219801"
+                href={phoneHref}
                 className="inline-flex items-center justify-center rounded-full bg-sky-700 px-7 py-4 text-base font-bold text-white shadow-[0_10px_25px_rgba(29,111,150,0.25)] transition hover:bg-sky-800"
               >
-                0541 321 98 01
+                {siteSettings.phone}
               </a>
               <a
                 href="#iletisim"
@@ -432,7 +345,7 @@ export default function Home() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service, index) => (
+          {serviceItems.map((service, index) => (
             <div
               key={service.title}
               className="group relative isolate overflow-hidden rounded-[20px] border border-sky-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(16,42,67,0.1)] transition duration-300 hover:-translate-y-2 hover:border-sky-500/50 hover:shadow-[0_20px_45px_rgba(29,111,150,0.2)]"
@@ -623,8 +536,8 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-slate-900 font-black">
                     ☎
                   </span>
-                  <a href="tel:+905413219801" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
-                    0541 321 98 01
+                  <a href={phoneHref} className="text-lg font-semibold text-slate-900 hover:text-sky-700">
+                    {siteSettings.phone}
                   </a>
                 </div>
 
@@ -632,8 +545,8 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-slate-900 font-black">
                     ✉
                   </span>
-                  <a href="mailto:info@kiranenerji.com" className="text-lg font-semibold text-slate-900 hover:text-sky-700">
-                    info@kiranenerji.com
+                  <a href={`mailto:${siteSettings.email}`} className="text-lg font-semibold text-slate-900 hover:text-sky-700">
+                    {siteSettings.email}
                   </a>
                 </div>
 
@@ -641,7 +554,7 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-slate-900 font-black">
                     📍
                   </span>
-                  <span className="text-lg font-semibold text-slate-900">İstanbul / Türkiye</span>
+                  <span className="text-lg font-semibold text-slate-900">{siteSettings.location}</span>
                 </div>
               </div>
             </div>
@@ -673,13 +586,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-[#050d18]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between lg:px-8">
-          <div className="text-lg font-black text-white">Kıran Enerji</div>
-          <div>© 2026 Kıran Enerji. Tüm hakları saklıdır.</div>
-          <div>Elektrik & Tesisat Hizmetleri</div>
-        </div>
-      </footer>
+      <SiteFooter businessName={siteSettings.business_name} />
     </main>
   );
 }

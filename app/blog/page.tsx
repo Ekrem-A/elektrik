@@ -1,6 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteFooter } from "../components/site-footer";
+import { SiteHeader } from "../components/site-header";
+import { DEFAULT_SITE_SETTINGS, type SiteSettings } from "../lib/site-content";
+import { createPublicSupabaseClient } from "../lib/supabase";
 
 export const metadata: Metadata = {
   title: "Elektrik Güvenliği ve Bakım Rehberi | Kıran Enerji",
@@ -34,7 +38,7 @@ const quickSteps = [
   },
 ];
 
-const guides = [
+const fallbackGuides = [
   {
     id: "sigorta-atmasi",
     category: "PANO VE SİGORTA",
@@ -67,40 +71,67 @@ const guides = [
   },
 ];
 
-export default function BlogPage() {
+async function PublishedGuides() {
+  const supabase = createPublicSupabaseClient();
+  let guides = fallbackGuides;
+
+  if (supabase) {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("id, slug, title, category, excerpt, content, image_url, image_alt")
+      .eq("is_published", true)
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      guides = data.map((post) => ({
+        id: post.slug,
+        category: post.category,
+        title: post.title,
+        image: post.image_url || "/arıza.jpg",
+        alt: post.image_alt || post.title,
+        text: post.excerpt,
+        details: post.content,
+      }));
+    }
+  }
+
+  return (
+    <div className="mt-8 grid gap-8 lg:grid-cols-3">
+      {guides.map((guide) => (
+        <article key={guide.id} id={guide.id} className="scroll-mt-8 border-b border-[#173b45]/15 pb-8">
+          <div className="relative mb-5 aspect-[16/9] overflow-hidden bg-[#dce9e7]">
+            <Image src={guide.image} alt={guide.alt} fill unoptimized sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+          </div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#17647b]">{guide.category}</p>
+          <h3 className="mt-2 text-xl font-black leading-snug text-[#172b33]">{guide.title}</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-600">{guide.text}</p>
+          <p className="mt-3 whitespace-pre-line border-l-2 border-[#78b9c8] pl-3 text-sm leading-6 text-slate-700">{guide.details}</p>
+        </article>
+      ))}
+      {guides.length === 0 && <p className="text-sm text-slate-600">Henüz yayınlanmış bir yazı bulunmuyor.</p>}
+    </div>
+  );
+}
+
+async function getSiteSettings(): Promise<SiteSettings> {
+  const supabase = createPublicSupabaseClient();
+  if (!supabase) return DEFAULT_SITE_SETTINGS;
+
+  const { data, error } = await supabase
+    .from("site_settings")
+    .select("*")
+    .eq("id", "main")
+    .single();
+
+  return !error && data ? (data as SiteSettings) : DEFAULT_SITE_SETTINGS;
+}
+
+export default async function BlogPage() {
+  const siteSettings = await getSiteSettings();
+
   return (
     <main className="min-h-screen bg-[#f7faf9] text-[#172b33]">
-      <header className="border-b border-[#173b45]/10 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 lg:px-8">
-          <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Kıran Enerji ana sayfa">
-            <Image
-              src="/logo.png"
-              alt="Kıran Enerji"
-              width={1476}
-              height={1066}
-              unoptimized
-              className="h-auto w-[52px] object-contain"
-            />
-            <span className="text-lg font-black text-slate-900">Kıran Enerji</span>
-          </Link>
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-slate-600 md:flex" aria-label="Ana menü">
-            <Link href="/" className="transition hover:text-sky-800">Ana sayfa</Link>
-            <Link href="/#hizmetler" className="transition hover:text-sky-800">Hizmetler</Link>
-            <Link href="/blog" aria-current="page" className="text-sky-800">Blog</Link>
-          </nav>
-          <a
-            href="tel:+905413219801"
-            className="shrink-0 bg-[#17647b] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#104c60]"
-          >
-            0541 321 98 01
-          </a>
-        </div>
-        <nav className="flex gap-6 overflow-x-auto border-t border-[#173b45]/10 px-5 py-3 text-sm font-semibold text-slate-600 md:hidden" aria-label="Mobil menü">
-          <Link href="/" className="whitespace-nowrap">Ana sayfa</Link>
-          <Link href="/#hizmetler" className="whitespace-nowrap">Hizmetler</Link>
-          <Link href="/blog" aria-current="page" className="whitespace-nowrap text-sky-800">Blog</Link>
-        </nav>
-      </header>
+      <SiteHeader settings={siteSettings} currentPath="/blog" />
 
       <section className="border-b border-[#173b45]/10 bg-[#edf5f4]">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:py-16 lg:grid-cols-[1fr_0.92fr] lg:items-center lg:px-8 lg:py-20">
@@ -138,7 +169,7 @@ export default function BlogPage() {
       <section className="bg-[#f3c85b] px-5 py-4 text-[#27343a]" aria-label="Acil durum uyarısı">
         <div className="mx-auto flex max-w-7xl flex-col gap-1 text-sm sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p className="font-bold">Yangın, yoğun duman veya yaralanma varsa güvenli alana çıkın.</p>
-          <p>112 Acil Çağrı Merkezi'ni arayın.</p>
+          <p>112 Acil Çağrı Merkezi&apos;ni arayın.</p>
         </div>
       </section>
 
@@ -184,29 +215,13 @@ export default function BlogPage() {
             <p className="max-w-lg text-sm leading-6 text-slate-600">Belirti devam ediyorsa kullanımı durdurun ve tesisata müdahale etmeden uzman desteği alın.</p>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-3">
-            {guides.map((guide) => (
-              <article key={guide.id} id={guide.id} className="scroll-mt-8 border-b border-[#173b45]/15 pb-8">
-                <div className="relative mb-5 aspect-[16/9] overflow-hidden bg-[#dce9e7]">
-                  <Image src={guide.image} alt={guide.alt} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
-                </div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#17647b]">{guide.category}</p>
-                <h3 className="mt-2 text-xl font-black leading-snug text-[#172b33]">{guide.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{guide.text}</p>
-                <p className="mt-3 border-l-2 border-[#78b9c8] pl-3 text-sm leading-6 text-slate-700">{guide.details}</p>
-              </article>
-            ))}
-          </div>
+          <Suspense fallback={<p className="mt-8 text-sm text-slate-600">Yazılar yükleniyor...</p>}>
+            <PublishedGuides />
+          </Suspense>
         </div>
       </section>
 
-      <footer className="bg-[#102a35] px-5 py-8 text-white lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/" className="font-black">Kıran Enerji</Link>
-          <p className="text-sm text-white/70">Elektrik arızası için profesyonel destek</p>
-          <a href="tel:+905413219801" className="text-sm font-bold text-[#c7e4f1] hover:text-white">0541 321 98 01</a>
-        </div>
-      </footer>
+      <SiteFooter businessName={siteSettings.business_name} />
     </main>
   );
 }
