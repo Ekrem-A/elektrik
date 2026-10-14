@@ -112,6 +112,7 @@ const navItems = [
   { label: "Hizmetler", href: "#hizmetler" },
   { label: "Neden Biz", href: "#nedenbiz" },
   { label: "Çalışma Alanları", href: "#calisma" },
+  { label: "Blog", href: "/blog" },
   { label: "Yorumlar", href: "#yorumlar" },
   { label: "İletişim", href: "#iletisim" },
 ];
